@@ -37,7 +37,7 @@ Acme::NamespaceRoulette - automatic namespace typo handling
 
 This module does nothing (except for screw around with AUTOLOAD, which
 might well break anything that depends on that), unless a typo is made
-with a method name, in which case some random other thingy from the
+with a function name, in which case some random other thingy from the
 symbol table is instead called.
 
 =head1 AUTHOR
