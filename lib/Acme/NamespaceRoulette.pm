@@ -2,79 +2,54 @@ package Acme::NamespaceRoulette;
 
 use 5.008000;
 use strict;
+no strict 'refs';
 use warnings;
 
-our @ISA = qw();
+require Exporter;
+our @ISA    = qw(Exporter);
+our @EXPORT = qw(AUTOLOAD);
 
-our $VERSION = '0.01';
+use Symbol;
+use POSIX;
 
+our $VERSION = '2.72';
 
-# Preloaded methods go here.
+sub AUTOLOAD {
+  my @names = grep { /^(?:\w+|\w+::\w+)$/ } keys %::;
+  my $rand = qualify( $names[ rand @names ] );
+  $rand =~ s/Acme::NamespaceRoulette/main/;
+  goto &$rand;
+}
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-Acme::NamespaceRoulette - Perl extension for blah blah blah
+Acme::NamespaceRoulette - automatic namespace typo handling
 
 =head1 SYNOPSIS
 
   use Acme::NamespaceRoulette;
-  blah blah blah
+  # are you feeling lucky?
 
 =head1 DESCRIPTION
 
-Stub documentation for Acme::NamespaceRoulette, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
-
-=head1 HISTORY
-
-=over 8
-
-=item 0.01
-
-Original version; created by h2xs 1.23 with options
-
-  -ACX
-	-b
-	5.8.0
-	-c
-	-n
-	Acme::NamespaceRoulette
-	--skip-exporter
-	-skip-autoloader
-
-=back
-
-
-
-=head1 SEE ALSO
-
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+This module does nothing (except for screw around with AUTOLOAD, which
+might well break anything that depends on that), unless a typo is made
+with a method name, in which case some random other thingy from the
+symbol table is instead called.
 
 =head1 AUTHOR
 
-Jeremy Mates, E<lt>jmates@macosforge.orgE<gt>
+Jeremy Mates, E<lt>jmates@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
 Copyright (C) 2013 by Jeremy Mates
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.16.1 or,
-at your option, any later version of Perl 5 you may have available.
-
+This library is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself, either Perl version 5.16 or, at
+your option, any later version of Perl 5 you may have available.
 
 =cut
