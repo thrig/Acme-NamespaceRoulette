@@ -1,11 +1,15 @@
+#!perl
+
 use 5.008000;
+
+use strict;
+use warnings;
 use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
-WriteMakefile(
+
+my %params = (
   NAME         => 'Acme::NamespaceRoulette',
-  VERSION_FROM => 'lib/Acme/NamespaceRoulette.pm', # finds $VERSION
-  PREREQ_PM    => {},                              # e.g., Module::Name => 1.1
+  VERSION_FROM => 'lib/Acme/NamespaceRoulette.pm',
+  PREREQ_PM    => {},
   ( $] >= 5.005
     ?    ## Add these new keywords supported since 5.005
       (
@@ -16,3 +20,23 @@ WriteMakefile(
     : ()
   ),
 );
+
+if ( $ExtUtils::MakeMaker::VERSION =~ /^\d\.\d\d$/ and $ExtUtils::MakeMaker::VERSION > 6.30 ) {
+  $params{LICENSE} = 'perl';
+}
+
+if ( $ExtUtils::MakeMaker::VERSION ge '6.46' ) {
+  $params{META_MERGE} = {
+    resources => {
+      homepage   => 'http://github.com/thrig/Acme-NamespaceRoulette',
+      license    => 'http://dev.perl.org/licenses/',
+      repository => 'http://github.com/thrig/Acme-NamespaceRoulette',
+    }
+  };
+}
+
+if ( $ExtUtils::MakeMaker::VERSION ge '6.48' ) {
+  $params{MIN_PERL_VERSION} = 5.008000;
+}
+
+WriteMakefile(%params);

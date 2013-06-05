@@ -1,5 +1,6 @@
-Makefile.PL
+Changes
 MANIFEST
+Makefile.PL
 README
-t/Acme-NamespaceRoulette.t
 lib/Acme/NamespaceRoulette.pm
+t/Acme-NamespaceRoulette.t
