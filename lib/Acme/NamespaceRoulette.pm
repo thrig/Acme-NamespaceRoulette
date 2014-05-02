@@ -12,7 +12,7 @@ our @EXPORT = qw(AUTOLOAD);
 use Symbol;
 use POSIX;
 
-our $VERSION = '3.21';
+our $VERSION = '3.45';
 
 sub AUTOLOAD {
   my @names = grep { /^(?:\w+|\w+::\w+)$/ } keys %::;
