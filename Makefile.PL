@@ -13,16 +13,15 @@ my %params = (
   ( $] >= 5.005
     ?    ## Add these new keywords supported since 5.005
       (
-      ABSTRACT_FROM =>
-        'lib/Acme/NamespaceRoulette.pm',    # retrieve abstract from module
-      AUTHOR => 'Jeremy Mates <jmates@cpan.org>'
+      ABSTRACT_FROM => 'lib/Acme/NamespaceRoulette.pm',
+      AUTHOR        => 'Jeremy Mates <jmates@cpan.org>'
       )
     : ()
   ),
 );
 
 if ( $ExtUtils::MakeMaker::VERSION =~ /^\d\.\d\d$/ and $ExtUtils::MakeMaker::VERSION > 6.30 ) {
-  $params{LICENSE} = 'perl';
+  $params{LICENSE} = 'artistic_2';
 }
 
 if ( $ExtUtils::MakeMaker::VERSION ge '6.46' ) {
